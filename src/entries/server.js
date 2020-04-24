@@ -1,21 +1,16 @@
 import React from 'react'
-import { renderToStaticMarkup, renderToString } from 'react-dom/server'
+import { renderToStaticMarkup } from 'react-dom/server'
 
-import App from '../components/App'
 import ConfigAccessForClient from '../components/ConfigAccessForClient'
 import Html from '../components/Html'
-import ReactRenderTarget from '../components/ReactRenderTarget'
-import ServerRoot from '../components/ServerRoot'
 
 const server = ({
 	__CONFIG__,
 	config,
-	request,
 	response,
 }) => {
-	const context = {}
-
-	const htmlString = (
+	response
+	.send(
 		'<!DOCTYPE html>'
 		.concat(
 			renderToStaticMarkup(
@@ -42,40 +37,15 @@ const server = ({
 						),
 					}}
 				>
-					<ReactRenderTarget
-						renderTargetId={
+					<div
+						id={
 							config
 							.get('reactRenderTargetId')
 						}
-					>
-						{
-							renderToString(
-								<ServerRoot
-									config={config}
-									context={context}
-									location={request.url}
-								>
-									<App />
-								</ServerRoot>
-							)
-						}
-					</ReactRenderTarget>
+					/>
 				</Html>
 			)
 		)
-	)
-
-	context.url
-	? (
-		response
-		.redirect(
-			301,
-			context.url,
-		)
-	)
-	: (
-		response
-		.send(htmlString)
 	)
 }
 
