@@ -4,6 +4,7 @@ import { hot } from 'react-hot-loader/root'
 import { Route, Switch } from 'react-router-dom'
 
 import CountdownRoot from './countdown/CountdownRoot'
+import ThousandProcessesRoot from './thousandProcesses/ThousandProcessesRoot'
 
 const App = () => (
 	<Fragment>
@@ -20,8 +21,8 @@ const App = () => (
 				<CountdownRoot />
 			</Route>
 
-			<Route path="/10k-processes">
-				<div />
+			<Route path="/thousand-processes">
+				<ThousandProcessesRoot />
 			</Route>
 		</Switch>
 	</Fragment>
