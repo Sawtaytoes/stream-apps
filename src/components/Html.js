@@ -22,7 +22,7 @@ const Html = ({
 		lang="en"
 	>
 		<head>
-			<title>Webpack Builder</title>
+			<title>Stream Apps</title>
 
 			{htmlComponents.head}
 		</head>
