@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import React from 'react'
+import React, { StrictMode } from 'react'
 import { BrowserRouter } from 'react-router-dom'
 import { hot } from 'react-hot-loader/root'
 
@@ -12,11 +12,13 @@ const propTypes = {
 const ClientRoot = ({
 	children,
 }) => (
-	<ConfigContext.Provider value={window.config}>
-		<BrowserRouter>
-			{children}
-		</BrowserRouter>
-	</ConfigContext.Provider>
+	<StrictMode>
+		<ConfigContext.Provider value={window.config}>
+			<BrowserRouter>
+				{children}
+			</BrowserRouter>
+		</ConfigContext.Provider>
+	</StrictMode>
 )
 
 ClientRoot.propTypes = propTypes

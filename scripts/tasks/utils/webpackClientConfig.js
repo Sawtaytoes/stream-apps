@@ -93,11 +93,11 @@ const webpackClientConfig = {
 	resolve: {
 		alias: {
 			'date-fns': 'date-fns/esm',
-			'react-dom': (
-				isLocalDevelopment
-				? '@hot-loader/react-dom'
-				: 'react-dom'
-			),
+			// 'react-dom': (
+			// 	isLocalDevelopment
+			// 	? '@hot-loader/react-dom'
+			// 	: 'react-dom'
+			// ),
 		},
 		extensions: ['.js'],
 	},

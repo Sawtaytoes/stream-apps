@@ -19,7 +19,6 @@ const rootElement = (
 	)
 )
 
-ReactDOM.hydrate(
-	reactRoot,
-	rootElement,
-)
+ReactDOM
+.createRoot(rootElement)
+.render(reactRoot)
