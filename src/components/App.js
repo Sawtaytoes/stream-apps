@@ -10,6 +10,12 @@ const App = () => (
 	<Fragment>
 		<Global
 			styles={css`
+				*,
+				*::before,
+				*::after {
+					box-sizing: border-box;
+				}
+
 				body {
 					margin: 0;
 				}
