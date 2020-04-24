@@ -78,6 +78,9 @@ const runTasks = ({
 			console.info(
 				dashes
 			)
+
+			taskNames === 'build'
+			&& process.exit()
 		},
 	})
 }
