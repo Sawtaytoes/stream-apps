@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { Fragment, useEffect, useMemo, useState } from 'react'
 import styled from '@emotion/styled'
 import { addSeconds, format, set } from 'date-fns/fp'
 
@@ -12,7 +12,6 @@ const StyledContainer = styled.div`
 	font-size: 180px;
 	height: 100vh;
 	justify-content: center;
-	overflow: hidden;
 	width: 100vw;
 `
 
@@ -29,26 +28,52 @@ const isBrowser = (
 )
 
 const Countdown = () => {
-	const startingSeconds = (
+	const urlSearchParams = (
 		useMemo(
 			() => (
 				isBrowser
+				&& (
+					// eslint-disable-next-line compat/compat
+					new URLSearchParams(
+						document
+						.location
+						.search
+						.substring(1)
+					)
+				)
+			),
+			[],
+		)
+	)
+
+	const message = (
+		useMemo(
+			() => (
+				urlSearchParams
+				? (
+					urlSearchParams
+					.get('message')
+				)
+				: ''
+			),
+			[urlSearchParams],
+		)
+	)
+
+	const startingSeconds = (
+		useMemo(
+			() => (
+				urlSearchParams
 				? (
 					Number(
-						// eslint-disable-next-line compat/compat
-						new URLSearchParams(
-							document
-							.location
-							.search
-							.substring(1)
-						)
-						.get('minutesFromNow')
+						urlSearchParams
+						.get('minutes')
 					)
 					* 60
 				)
 				: 0
 			),
-			[],
+			[urlSearchParams],
 		)
 	)
 
@@ -108,13 +133,33 @@ const Countdown = () => {
 
 	return (
 		<StyledContainer>
-			<div>
-				Stream starts in...
-			</div>
+			{
+				Object.is(
+					timeRemaining,
+					'0:00',
+				)
+				? (
+					<div>
+						Stream starting NOW!
+					</div>
+				)
+				: (
+					<Fragment>
+						<div>
+							{
+								message
+								|| "Stream starts in..."
+							}
+						</div>
 
-			<StyledTimeRemaining suppressHydrationWarning>
-				{timeRemaining}
-			</StyledTimeRemaining>
+
+						<StyledTimeRemaining suppressHydrationWarning>
+							{timeRemaining}
+						</StyledTimeRemaining>
+					</Fragment>
+				)
+			}
+
 		</StyledContainer>
 	)
 }
