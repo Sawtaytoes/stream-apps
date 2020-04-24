@@ -5,5 +5,6 @@ module.exports = {
 	nodeEnvironment: 'production',
 	outputPath: getAbsolutePath('./build'),
 	reactRenderTargetId: 'react-root',
+	serverHostname: 'localhost',
 	serverPort: 8100,
 }

@@ -25,7 +25,11 @@ const server = ({
 							<script
 								defer
 								src={
-									'http://localhost'
+									'http://'
+									.concat(
+										config
+										.get('serverHostname')
+									)
 									.concat(':')
 									.concat(
 										config
